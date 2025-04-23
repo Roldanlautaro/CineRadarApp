@@ -7,10 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.google.gson.Gson
 import com.lautarodev.cineradar.ui.theme.CineRadarTheme
 
@@ -31,9 +28,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun getCineRadarResult(): CineRadarResult {
+fun getCineRadarResult(): List<shows> {
     val gson = Gson()
-    return gson.fromJson(json, CineRadarResult::class.java)
+    return gson.fromJson(json, Array<shows>::class.java).toList()
 }
 
 

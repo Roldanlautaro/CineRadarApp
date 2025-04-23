@@ -7,9 +7,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.lautarodev.cineradar.ui.theme.CineRadarTheme
 
 @Composable
-fun CineListScreen(CineRadarList : List<CineRadarResult>, modifier: Modifier = Modifier) {
+fun CineListScreen(CineRadarList : List<shows>, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello Mundo",
+        text = "Lista de peliculas",
         modifier = modifier
     )
 }
@@ -18,6 +18,6 @@ fun CineListScreen(CineRadarList : List<CineRadarResult>, modifier: Modifier = M
 @Composable
 fun CineListPreview() {
     CineRadarTheme {
-        CineListScreen(List<CineRadarResult>())
+        // dasda
     }
 }
