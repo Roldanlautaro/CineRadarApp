@@ -1,13 +1,18 @@
-package com.lautarodev.cineradar
+package com.lautarodev.cineradar.shows
 
 data class CineRadarResult(
     val shows : List<shows>
 )
 
+data class CineRadarDetailResult(
+    val shows: shows
+)
+
+
 data class shows(
     val itemType : String, // Show
     val showType : String, // Movie o series
-    val id : Int, // ID
+    val id : String, // ID
     val title : String, // Titulo de la pelicula
     val overview : String, // Descripcion
     val releaseYear : Int, // Año de estreno
@@ -41,3 +46,33 @@ data class PosterSizes(
     val w1080: String?,  // Solo para algunas resoluciones
     val w1440: String?
 )
+
+fun emptyShows(): shows {
+    return shows(
+        itemType = "",
+        showType = "",
+        id = "",
+        title = "",
+        overview = "",
+        releaseYear = 0,
+        originalTitle = null,
+        genres = emptyList(),
+        directors = emptyList(),
+        cast = emptyList(),
+        rating = 0,
+        runtime = 0,
+        imageSet = ImageSet(
+            verticalPoster = PosterSizes(
+                w240 = "",
+                w360 = null,
+                w480 = null,
+                w600 = null,
+                w720 = null,
+                w1080 = null,
+                w1440 = null
+            ),
+            horizontalPoster = null,
+            horizontalBackdrop = null
+        )
+    )
+}

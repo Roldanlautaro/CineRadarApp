@@ -1,5 +1,6 @@
-package com.lautarodev.cineradar
+package com.lautarodev.cineradar.ui.screens.commons
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,15 +17,20 @@ import androidx.compose.ui.draw.clip
 import coil.compose.AsyncImage
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.lautarodev.cineradar.shows.shows
 
 
 @Composable
 fun CineRadarUiItem( // Lo que quiero que muestre en las cards en la pantalla y sus personalizaciones
     shows: shows,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit
 ) {
     Card(
         modifier = modifier
+            .clickable {
+                onClick(shows.id)
+            }
             .padding(8.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
