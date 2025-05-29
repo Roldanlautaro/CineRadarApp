@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-     private val BASE_URL = "https://streaming-availability.p.rapidapi.com/shows/"
+     private val BASE_URL = "https://streaming-availability.p.rapidapi.com/"
 
     private  val client by lazy {
         OkHttpClient.Builder()

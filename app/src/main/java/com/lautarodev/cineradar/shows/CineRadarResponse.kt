@@ -8,11 +8,11 @@ data class CineRadarDetailResult(
     val shows: shows
 )
 
-
 data class shows(
     val itemType : String, // Show
     val showType : String, // Movie o series
-    val id : String, // ID
+    val id : String,
+    val imdbId : String,
     val title : String, // Titulo de la pelicula
     val overview : String, // Descripcion
     val releaseYear : Int, // Año de estreno
@@ -52,6 +52,7 @@ fun emptyShows(): shows {
         itemType = "",
         showType = "",
         id = "",
+        imdbId = "",
         title = "",
         overview = "",
         releaseYear = 0,

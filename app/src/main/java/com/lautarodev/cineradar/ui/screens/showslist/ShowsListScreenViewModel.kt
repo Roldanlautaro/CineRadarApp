@@ -25,9 +25,6 @@ class ShowsListScreenViewModel(
     var uiState by mutableStateOf(ShowsListScreenState())
         private set
 
-     init {
-    // fechtShows()
-     }
 
     private var fetchJob : Job? = null
 

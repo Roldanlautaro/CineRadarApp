@@ -9,6 +9,7 @@ import com.lautarodev.cineradar.domain.IShowsRepository
 import com.lautarodev.cineradar.shows.ShowsRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import android.util.Log
 
 class ShowsDetailScreenViewModel (
     private val ShowsRepository: IShowsRepository = ShowsRepository()

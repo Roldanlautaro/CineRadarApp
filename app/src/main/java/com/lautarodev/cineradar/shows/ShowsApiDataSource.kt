@@ -33,6 +33,7 @@ class ShowsApiDataSource : ICineRadarShowsSource {
     }
 
     override suspend fun getShowById(id: String): shows {
-        return RetrofitInstance.showsApi.getShow(id).shows
+        Log.d("id", id)
+        return RetrofitInstance.showsApi.getShow(id)
     }
 }

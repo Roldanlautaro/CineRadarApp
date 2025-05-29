@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface IShowsAPI {
     // endpoints a consumir
 
-    @GET("search/title")
+    @GET("shows/search/title")
     suspend fun getShowsSearch(
         @Query("title") title : String,
         @Query("country") country: String = "ar",
@@ -20,5 +20,7 @@ interface IShowsAPI {
     suspend fun getShow(
         @Path("id") id: String,
         @Query("country") country: String = "ar"
-    ): CineRadarDetailResult
+    ): shows
+
+
 }

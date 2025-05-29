@@ -27,6 +27,6 @@ fun ShowsDetailScreen(
         }
 
     }else{
-        CineRadarUiItem(viewModel.uiState.ShowsDetail, onClick = {id -> {}})
+        CineRadarUiItem(viewModel.uiState.ShowsDetail, onClick = {{}})
     }
 }
