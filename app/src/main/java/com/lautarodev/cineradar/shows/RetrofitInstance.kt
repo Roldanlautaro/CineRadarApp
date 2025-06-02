@@ -1,18 +1,20 @@
 package com.lautarodev.cineradar.shows
 
+import com.lautarodev.cineradar.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-     private val BASE_URL = "https://streaming-availability.p.rapidapi.com/"
+    private val BASE_URL = "https://streaming-availability.p.rapidapi.com/"
+    private val apiKey = BuildConfig.API_KEY
 
     private  val client by lazy {
         OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .addHeader("X-RapidAPI-Key", "2fc3529d10msh0013db6722847a1p14e8d3jsn579ae3d2a078")
+                    .addHeader("X-RapidAPI-Key", apiKey)
                     .build()
                 chain.proceed(request)
             }

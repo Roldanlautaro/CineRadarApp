@@ -1,10 +1,25 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.gms.google.services)
-
 }
+
+fun loadEnv(): Properties {
+    val envFile = rootProject.file(".env")
+    val props = Properties()
+    if (envFile.exists()) {
+        envFile.inputStream().use { stream ->
+            props.load(stream)
+        }
+    }
+    return props
+}
+
+// Carga las variables de entorno desde el archivo .env
+val env = loadEnv()
 
 android {
     namespace = "com.lautarodev.cineradar"
@@ -18,6 +33,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Agregar el campo BuildConfig personalizado
+        buildConfigField("String", "API_KEY", "\"${env["API_KEY"]}\"")
     }
 
     buildTypes {
@@ -29,20 +47,23 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
+        buildConfig = true  // Habilita la generación de BuildConfig
     }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -74,6 +95,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-
 }
