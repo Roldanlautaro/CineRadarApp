@@ -1,7 +1,7 @@
 # 🎬 CineRadar
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/dc716fae-fed6-4fc2-b599-57111b7bc473" alt="cineradar_logo" width="100%" />
+  <img src="https://github.com/user-attachments/assets/dc716fae-fed6-4fc2-b599-57111b7bc473" alt="cineradar_logo" width="400" />
 </p>
 
 
