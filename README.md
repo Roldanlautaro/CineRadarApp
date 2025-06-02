@@ -53,50 +53,15 @@
 
 Utilizamos la **Streaming Availability API** para obtener información de películas y series.
 
-Ejemplos de endpoints:
-
-- 🔥 Películas recomendadas:  
-  `GET /shows/search/filters?show_type=movie&rating_min=80...`
-
-- 📺 Buscar por título:  
-  `GET /shows/search/title?title=Harry Potter...`
-
-- 🎞️ Filtrar por plataforma (Netflix, Disney+, HBO):  
-  `GET /shows/search/filters?catalogs=netflix...`
-
-- 🕵️‍♂️ Filtrar por género, año, ranking, tipo (película o serie), etc.
-
----
-
-## ☁️ Qué datos se almacenan en Firebase
-
-### 🔐 Autenticación
-- `userId`, `email`, `displayName`, `photoURL`
-
-### 📌 Lista para ver después
-- ID de contenido, título, descripción, ranking, imagen, fecha agregada, cantidad
-
-### ✅ Contenidos vistos
-- ID de contenido, título, ranking, imagen, fecha visto, cantidad
-
 ---
 
 ## 🎨 Diseño y Maquetado
 
-La interfaz fue diseñada completamente en [Figma](https://www.figma.com) con foco en:
+La interfaz fue diseñada completamente en [Figma]([https://www.figma.com](https://www.figma.com/design/icJdw9ZOm8MmPAXaXEAsk4/CineRadar?node-id=2204-215&p=f&t=FsrmjCrBvqhJJnve-0)) con foco en:
 
 - ✅ Accesibilidad
 - 🎨 Diseño minimalista
 - 📱 Interfaz intuitiva para móviles
-
----
-
-## 🚀 Próximas mejoras
-
-- 🎯 Recomendaciones personalizadas según historial
-- 🌙 Modo oscuro
-- 🔄 Sincronización offline
-- 💬 Sistema de valoraciones y comentarios
 
 ---
 
