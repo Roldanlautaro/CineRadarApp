@@ -4,6 +4,9 @@
 
 **CineRadar** es una aplicación móvil moderna e intuitiva que te permite descubrir, buscar y guardar películas y series, brindándote información detallada sobre cada contenido y en qué plataforma de streaming está disponible. ¡Todo desde una sola app!
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/dc716fae-fed6-4fc2-b599-57111b7bc473" alt="cineradar_logo" width="200" />
+</p>
 
 ## ✨ Características principales
 
