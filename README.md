@@ -6,8 +6,6 @@
   ---![cineradar_logo](https://github.com/user-attachments/assets/dc716fae-fed6-4fc2-b599-57111b7bc473)
 </div>
 
----![cineradar_logo](https://github.com/user-attachments/assets/dc716fae-fed6-4fc2-b599-57111b7bc473)
-
 
 ## ✨ Características principales
 
