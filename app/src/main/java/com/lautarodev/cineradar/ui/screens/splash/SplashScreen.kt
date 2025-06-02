@@ -36,7 +36,7 @@ fun SplashScreen(
     LaunchedEffect(Unit) {
         progress = 1f
         delay(3100)
-        navController.navigate(Screens.ShowsList.route) {
+        navController.navigate(Screens.Login.route) { // Se Redirige a la pantalla de login
             popUpTo("splash") { inclusive = true }
         }
     }
@@ -65,9 +65,12 @@ fun SplashScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.cineradar_logo),
-                    contentDescription = "Logo CineRadar",
-                    modifier = Modifier.size(550.dp)
+                    painter = painterResource(id = R.drawable.cineradar_logo), // Tu logo central
+                    contentDescription = "Logo de CineRadar",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .size(250.dp)
+                        .fillMaxWidth()
                 )
 
                 // Esta barra quedará pegada abajo del logo
