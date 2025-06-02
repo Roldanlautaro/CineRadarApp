@@ -60,6 +60,7 @@ Utilizamos la **Streaming Availability API** para obtener información de pelíc
 ## 🎨 Diseño y Maquetado
 
 La interfaz fue diseñada completamente en [Figma](https://www.figma.com/design/icJdw9ZOm8MmPAXaXEAsk4/CineRadar?node-id=2204-215&p=f&t=FsrmjCrBvqhJJnve-0) con foco en:
+**[XAMPP](https://www.apachefriends.org/es/index.html)**.
 
 - ✅ Accesibilidad
 - 🎨 Diseño minimalista
