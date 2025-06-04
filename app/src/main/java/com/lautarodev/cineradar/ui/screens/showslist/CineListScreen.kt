@@ -3,12 +3,15 @@ package com.lautarodev.cineradar.ui.screens.showslist
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.lautarodev.cineradar.R
 import com.lautarodev.cineradar.ui.screens.Screens
 import com.lautarodev.cineradar.ui.screens.commons.CineRadarUIList
 import com.lautarodev.cineradar.ui.screens.commons.Navbar
@@ -19,6 +22,11 @@ fun CineListScreen(
     viewModel: ShowsListScreenViewModel = viewModel(),
     navController: NavHostController
 ) {
+
+    val poppinsFontFamily = FontFamily(
+        Font(R.font.poppins_semibold)
+    )
+
     Scaffold(
         bottomBar = {
             Navbar(navController = navController)
@@ -31,29 +39,13 @@ fun CineListScreen(
                 .padding(16.dp)
         ) {
             Text(
-                text = "Lista de películas",
-                style = MaterialTheme.typography.titleLarge
+                text = "👀 RECOMENDACIONES",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = poppinsFontFamily
             )
             Spacer(modifier = Modifier.height(12.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextField(
-                    value = viewModel.uiState.searchQuery,
-                    modifier = Modifier.weight(1f),
-                    label = { Text("Buscar") },
-                    singleLine = true,
-                    onValueChange = { viewModel.searchChange(it) }
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Button(onClick = { viewModel.fechtShows() }) {
-                    Text("Buscar")
-                }
-            }
-
-            Spacer(modifier = Modifier.height(12.dp))
             CineRadarUIList(
                 viewModel.uiState.showsList,
                 modifier = Modifier.fillMaxSize(),

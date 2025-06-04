@@ -12,7 +12,6 @@ fun CineRadarUIList(
     modifier: Modifier = Modifier,
     onClick: (String) -> Unit
 ){
-    // CineRadarUiItem(list[0])
     LazyColumn(
         modifier = modifier
     ){

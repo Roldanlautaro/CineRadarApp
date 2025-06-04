@@ -19,7 +19,7 @@ val navigationItems = listOf(
     NavigationItem(
         title = "Busqueda",
         icon = Icons.Default.Search,
-        route = ""
+        route = Screens.Busqueda.route
     ),
     NavigationItem(
         title = "Popular",

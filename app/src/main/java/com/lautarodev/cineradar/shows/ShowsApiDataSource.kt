@@ -36,4 +36,10 @@ class ShowsApiDataSource : ICineRadarShowsSource {
         Log.d("id", id)
         return RetrofitInstance.showsApi.getShow(id)
     }
+
+    override suspend fun getAllCienciaFiccion(): List<shows> {
+        val response: CineRadarResult = RetrofitInstance.showsApi.getAllCienciaFiccion()
+        return response.shows
+
+    }
 }

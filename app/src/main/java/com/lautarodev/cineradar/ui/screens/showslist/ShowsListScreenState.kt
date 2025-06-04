@@ -4,6 +4,6 @@ import com.lautarodev.cineradar.shows.shows
 
 
 data class ShowsListScreenState(
-    val showsList : List<shows> = emptyList(),
-    val searchQuery: String = ""
+    val showsList: List<shows> = emptyList(),
+    val searchQuery: String = "",
 )

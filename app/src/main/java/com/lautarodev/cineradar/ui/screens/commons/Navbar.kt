@@ -23,7 +23,7 @@ fun Navbar(
     }
 
     NavigationBar(
-        containerColor = Color.White
+        containerColor = Color(0xFF090808)
     ) {
         navigationItems.forEachIndexed { index, item ->
             NavigationBarItem(
@@ -39,7 +39,7 @@ fun Navbar(
                     Text(
                         item.title,
                         color = if (index == selectedNavigationIndex.intValue)
-                            Color.Black
+                            Color.White
                         else Color.Gray
                     )
                 },

@@ -19,6 +19,10 @@ class CineRadarTestShowsSource : ICineRadarShowsSource {
         return getShowsList("")[0]
     }
 
+    override suspend fun getAllCienciaFiccion(): List<shows> {
+        TODO("Not yet implemented")
+    }
+
     private var json = """
     {
   "shows": [

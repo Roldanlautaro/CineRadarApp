@@ -1,5 +1,4 @@
-package com.lautarodev.cineradar.ui.screens.showslist
-
+package com.lautarodev.cineradar.ui.screens.busqueda
 
 import android.util.Log
 import androidx.compose.runtime.getValue
@@ -11,19 +10,16 @@ import com.lautarodev.cineradar.domain.IShowsRepository
 import com.lautarodev.cineradar.shows.ShowsRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import okio.IOException
+import java.io.IOException
 
-class ShowsListScreenViewModel(
+class BusquedaScreenViewModel(
     private val ShowsRepository : IShowsRepository = ShowsRepository()
 ) : ViewModel()
 
 {
-    var uiState by mutableStateOf(ShowsListScreenState())
+    var uiState by mutableStateOf(BusquedaScreenState())
         private set
 
-    init {
-        fechtShows() // Muestra los datos
-    }
 
     private var fetchJob : Job? = null
 
@@ -32,10 +28,10 @@ class ShowsListScreenViewModel(
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
             try {
-                uiState = uiState.copy(showsList = ShowsRepository.getAllCienciaFiccion())
+                uiState = uiState.copy(showsList = ShowsRepository.fetchShows(uiState.searchQuery))
 
             }catch (e: IOException) {
-                Log.e("CineRadar","Error recuperando los datos")
+                Log.e("CineRadar","Error recuperando la lista de peliculas e series")
             }
 
         }

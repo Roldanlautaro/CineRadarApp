@@ -8,6 +8,10 @@ class ShowsRepository(
 
 {
 
+    override suspend fun getAllCienciaFiccion(): List<shows> {
+        return CineRadarShowsSource.getAllCienciaFiccion()
+    }
+
     override suspend fun fetchShows(search : String) : List<shows>{
         return CineRadarShowsSource.getShowsList(search)
     }
@@ -15,4 +19,5 @@ class ShowsRepository(
     override suspend fun fetchShow(id: String): shows {
         return CineRadarShowsSource.getShowById(id)
     }
+
 }

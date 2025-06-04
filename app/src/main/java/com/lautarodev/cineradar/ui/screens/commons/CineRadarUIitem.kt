@@ -21,16 +21,14 @@ import com.lautarodev.cineradar.shows.shows
 
 
 @Composable
-fun CineRadarUiItem( // Lo que quiero que muestre en las cards en la pantalla y sus personalizaciones
+fun CineRadarUiItem(
     shows: shows,
     modifier: Modifier = Modifier,
     onClick: (String) -> Unit
 ) {
     Card(
         modifier = modifier
-            .clickable {
-                onClick(shows.id)
-            }
+            .clickable { onClick(shows.id) }
             .padding(8.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -39,29 +37,43 @@ fun CineRadarUiItem( // Lo que quiero que muestre en las cards en la pantalla y 
             containerColor = MaterialTheme.colorScheme.surface
         )
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = shows.title,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
+        Column(modifier = Modifier.padding(16.dp)) {
 
-            Spacer(modifier = Modifier.height(8.dp))
-
+            // Imagen más chica
             AsyncImage(
                 model = shows.imageSet.verticalPoster?.w360,
                 contentDescription = shows.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(140.dp)
                     .clip(RoundedCornerShape(12.dp))
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            // Fila con título y rating
+            androidx.compose.foundation.layout.Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = shows.title,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.weight(1f)
+                )
+
+                Text(
+                    text = "⭐ ${shows.rating}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Descripción debajo del título y rating
             Text(
                 text = shows.overview,
                 style = MaterialTheme.typography.bodyMedium,

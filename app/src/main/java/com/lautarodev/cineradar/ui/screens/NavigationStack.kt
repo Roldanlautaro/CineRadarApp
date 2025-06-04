@@ -6,6 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.lautarodev.cineradar.ui.screens.ShowsDetail.ShowsDetailScreen
+import com.lautarodev.cineradar.ui.screens.busqueda.BusquedaScreen
+import com.lautarodev.cineradar.ui.screens.loader.LoaderScreen
 import com.lautarodev.cineradar.ui.screens.login.LoginScreen
 import com.lautarodev.cineradar.ui.screens.showslist.CineListScreen
 import com.lautarodev.cineradar.ui.screens.splash.SplashScreen
@@ -14,7 +16,7 @@ import com.lautarodev.cineradar.ui.screens.splash.SplashScreen
 fun NavigationStack(
 
     onGoogleSignInClick: () -> Unit,
-    navController: NavHostController
+    navController: NavHostController,
 )
 {
     // Las rutas de navegacion de la app
@@ -22,7 +24,7 @@ fun NavigationStack(
     NavHost(
         navController = navController,
         startDestination = Screens.Splash.route
-    ){
+    ) {
 
         // Pantalla Splash
         composable(route = Screens.Splash.route) {
@@ -32,14 +34,22 @@ fun NavigationStack(
         composable(route = Screens.Login.route) {
             LoginScreen(onGoogleSignInClick, navController = navController)
         }
+        //Pantalla loader
+        composable(route = Screens.Loader.route) {
+            LoaderScreen(navController = navController)
+        }
         //Pantalla Main
         composable(route = Screens.ShowsList.route) {
             CineListScreen(navController = navController)
         }
+        //Pantalla Detalle
         composable(route = Screens.ShowsDetail.route + "/{id}") { it ->
             val id = it.arguments?.getString("id") ?: ""
             ShowsDetailScreen(id = id)
         }
+        //Pantalla Busqueda
+        composable(route = Screens.Busqueda.route) {
+            BusquedaScreen(navController = navController)
+        }
     }
-
 }
