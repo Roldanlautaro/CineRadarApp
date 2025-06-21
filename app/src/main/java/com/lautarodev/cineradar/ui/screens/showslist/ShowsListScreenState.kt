@@ -4,6 +4,8 @@ import com.lautarodev.cineradar.shows.shows
 
 
 data class ShowsListScreenState(
-    val showsList: List<shows> = emptyList(),
-    val searchQuery: String = "",
+    val cienciaFiccion: List<shows> = emptyList(),
+    val netflixTop: List<shows> = emptyList(),
+    val disneyScifi: List<shows> = emptyList(),
+    val hboHorror: List<shows> = emptyList()
 )

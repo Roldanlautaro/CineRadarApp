@@ -6,5 +6,10 @@ interface IShowsRepository {
 
     suspend fun fetchShows(search : String) : List<shows>
     suspend fun fetchShow(id : String) : shows
+    // Pantalla main
+
     suspend fun getAllCienciaFiccion() : List<shows>
+    suspend fun getAllMejoresPeliculasNETFLIX() : List<shows>
+    suspend fun getAllMejoresPeliculasCienciaFiccionDISNEY() : List<shows>
+    suspend fun getAllMejoresPeliculasTerrorHBO() : List<shows>
 }

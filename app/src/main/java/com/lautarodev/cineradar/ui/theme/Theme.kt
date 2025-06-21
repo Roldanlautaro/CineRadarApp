@@ -60,7 +60,7 @@ fun CineRadarTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = tipografica,
         content = content
     )
 }

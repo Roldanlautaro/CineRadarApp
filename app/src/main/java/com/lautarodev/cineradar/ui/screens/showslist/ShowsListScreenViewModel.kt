@@ -27,21 +27,25 @@ class ShowsListScreenViewModel(
 
     private var fetchJob : Job? = null
 
-    fun fechtShows(){
-
+    fun fechtShows() {
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
             try {
-                uiState = uiState.copy(showsList = ShowsRepository.getAllCienciaFiccion())
+                val cienciaFiccion = ShowsRepository.getAllCienciaFiccion()
+                val netflixTop = ShowsRepository.getAllMejoresPeliculasNETFLIX()
+                val disneyScifi = ShowsRepository.getAllMejoresPeliculasCienciaFiccionDISNEY()
+                val hboHorror = ShowsRepository.getAllMejoresPeliculasTerrorHBO()
 
-            }catch (e: IOException) {
-                Log.e("CineRadar","Error recuperando los datos")
+                uiState = uiState.copy(
+                    cienciaFiccion = cienciaFiccion,
+                    netflixTop = netflixTop,
+                    disneyScifi = disneyScifi,
+                    hboHorror = hboHorror
+                )
+
+            } catch (e: IOException) {
+                Log.e("CineRadar", "Error recuperando los datos", e)
             }
-
         }
-    }
-
-    fun searchChange(search: String){
-        uiState = uiState.copy(searchQuery = search, showsList = uiState.showsList)
     }
 }

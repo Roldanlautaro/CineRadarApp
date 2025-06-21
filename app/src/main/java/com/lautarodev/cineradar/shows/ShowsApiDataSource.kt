@@ -37,9 +37,26 @@ class ShowsApiDataSource : ICineRadarShowsSource {
         return RetrofitInstance.showsApi.getShow(id)
     }
 
+    // Pantalla main
+
     override suspend fun getAllCienciaFiccion(): List<shows> {
         val response: CineRadarResult = RetrofitInstance.showsApi.getAllCienciaFiccion()
         return response.shows
 
+    }
+
+    override suspend fun getAllMejoresPeliculasNETFLIX(): List<shows> {
+        val response: CineRadarResult = RetrofitInstance.showsApi.getAllMejoresPeliculasNETFLIX()
+        return response.shows
+    }
+
+    override suspend fun getAllMejoresPeliculasCienciaFiccionDISNEY(): List<shows> {
+        val response: CineRadarResult = RetrofitInstance.showsApi.getAllMejoresPeliculasCienciaFiccionDISNEY()
+        return response.shows
+    }
+
+    override suspend fun getAllMejoresPeliculasTerrorHBO(): List<shows> {
+        val response: CineRadarResult = RetrofitInstance.showsApi.getAllMejoresPeliculasTerrorHBO()
+        return response.shows
     }
 }

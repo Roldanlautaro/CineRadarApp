@@ -19,7 +19,21 @@ class CineRadarTestShowsSource : ICineRadarShowsSource {
         return getShowsList("")[0]
     }
 
+    // Pantalla main
+
     override suspend fun getAllCienciaFiccion(): List<shows> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAllMejoresPeliculasNETFLIX(): List<shows> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAllMejoresPeliculasCienciaFiccionDISNEY(): List<shows> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAllMejoresPeliculasTerrorHBO(): List<shows> {
         TODO("Not yet implemented")
     }
 
