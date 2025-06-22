@@ -6,8 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.lautarodev.cineradar.ui.screens.ShowsDetail.ShowsDetailScreen
 import com.lautarodev.cineradar.ui.screens.busqueda.BusquedaScreen
-import com.lautarodev.cineradar.ui.screens.loader.LoaderScreen
 import com.lautarodev.cineradar.ui.screens.login.LoginScreen
+import com.lautarodev.cineradar.ui.screens.perfil.PerfilScreen
 import com.lautarodev.cineradar.ui.screens.popular.PopularScreen
 import com.lautarodev.cineradar.ui.screens.showslist.CineListScreen
 import com.lautarodev.cineradar.ui.screens.splash.SplashScreen
@@ -34,10 +34,6 @@ fun NavigationStack(
         composable(route = Screens.Login.route) {
             LoginScreen(onGoogleSignInClick, navController = navController)
         }
-        //Pantalla loader
-        composable(route = Screens.Loader.route) {
-            LoaderScreen(navController = navController)
-        }
         //Pantalla Main
         composable(route = Screens.ShowsList.route) {
             CineListScreen(navController = navController)
@@ -54,6 +50,17 @@ fun NavigationStack(
         // Pantalla Popular
         composable(route = Screens.Popular.route) {
             PopularScreen(navController = navController)
+        }
+        // Pantalla De Perfil
+        composable(route = Screens.Perfil.route) {
+            PerfilScreen(
+                onLogout = {
+                    navController.navigate(Screens.Login.route) {
+                        popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                    }
+                },
+                navController = navController
+            )
         }
     }
 }

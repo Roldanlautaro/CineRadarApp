@@ -8,7 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.lautarodev.cineradar.ui.screens.commons.CineRadarUiItem
+import androidx.compose.runtime.LaunchedEffect
+
 
 @Composable
 fun ShowsDetailScreen(
@@ -17,7 +18,10 @@ fun ShowsDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: ShowsDetailScreenViewModel = viewModel()
 ) {
-    viewModel.setShowsID(id)
+    // Esto asegura que se llame solo una vez
+    LaunchedEffect(key1 = id) {
+        viewModel.setShowsID(id)
+    }
 
     if (viewModel.uiState.ShowsDetail.id.isEmpty()) {
         Box(
@@ -26,7 +30,6 @@ fun ShowsDetailScreen(
         ) {
             CircularProgressIndicator()
         }
-
     } else {
         ShowsUiItemDetail(viewModel.uiState.ShowsDetail, navController)
     }

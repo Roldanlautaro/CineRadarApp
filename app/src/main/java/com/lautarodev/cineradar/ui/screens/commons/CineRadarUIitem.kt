@@ -15,6 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import coil.compose.AsyncImage
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -29,9 +31,15 @@ fun CineRadarUiItem(
 ) {
     Card(
         modifier = modifier
-            .clickable { onClick(shows.id) }
+            .shadow(
+                elevation = 16.dp,
+                shape = RoundedCornerShape(16.dp),
+                ambientColor = Color.White.copy(alpha = 0.1f),
+                spotColor = Color.White.copy(alpha = 0.1f)
+            )
             .padding(4.dp)
-            .width(140.dp), // MÁS ANGOSTA
+            .width(140.dp)
+            .clickable { onClick(shows.id) },
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(8.dp),
         colors = CardDefaults.cardColors(
@@ -46,7 +54,7 @@ fun CineRadarUiItem(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(240.dp) // MÁS ALTA
+                    .height(240.dp)
                     .clip(RoundedCornerShape(12.dp))
             )
 
@@ -68,4 +76,5 @@ fun CineRadarUiItem(
         }
     }
 }
+
 

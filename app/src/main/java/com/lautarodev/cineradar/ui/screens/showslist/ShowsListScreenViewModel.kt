@@ -30,6 +30,8 @@ class ShowsListScreenViewModel(
     fun fechtShows() {
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
+            uiState = uiState.copy(isLoading = true) // Mostrar loader
+
             try {
                 val cienciaFiccion = ShowsRepository.getAllCienciaFiccion()
                 val netflixTop = ShowsRepository.getAllMejoresPeliculasNETFLIX()
@@ -40,11 +42,13 @@ class ShowsListScreenViewModel(
                     cienciaFiccion = cienciaFiccion,
                     netflixTop = netflixTop,
                     disneyScifi = disneyScifi,
-                    hboHorror = hboHorror
+                    hboHorror = hboHorror,
+                    isLoading = false // Ocultar loader
                 )
 
             } catch (e: IOException) {
                 Log.e("CineRadar", "Error recuperando los datos", e)
+                uiState = uiState.copy(isLoading = false) // Asegurarse de ocultar el loader aunque falle
             }
         }
     }

@@ -1,5 +1,8 @@
 package com.lautarodev.cineradar.ui.screens.popular
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -26,7 +29,7 @@ fun PopularScreen(
     viewModel: PopularScreenViewModel = viewModel(),
     navController: NavHostController
 ) {
-    val poppinsFontFamily = FontFamily(Font(R.font.poppins_semibold))
+    val state = viewModel.uiState
 
     Scaffold(
         bottomBar = {
@@ -35,65 +38,81 @@ fun PopularScreen(
         containerColor = Color.Black
     ) { innerPadding ->
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .background(Color.Black)
-        ) {
-            // HEADER (logo arriba del todo, chiquito y centrado)
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp), // casi pegado al top
-                contentAlignment = Alignment.Center
+        if (state.isLoading) {
+            // Loader mientras se cargan los datos
+            AnimatedVisibility(
+                visible = state.isLoading,
+                enter = fadeIn(),
+                exit = fadeOut()
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.cineradar_logo),
-                    contentDescription = "Logo CineRadar",
-                    modifier = Modifier.size(36.dp) // más chico
-                )
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(color = Color(0xFFFE5196))
+                }
             }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // CONTENIDO
-
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(bottom = 80.dp)
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .background(Color.Black)
             ) {
-                item {
-                    CineRadarUIList(
-                        list = viewModel.uiState.mejoresSeries,
-                        title = "\uD83D\uDD25 MEJORES SERIES",
-                        onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
+                // HEADER (logo arriba del todo, chiquito y centrado)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp), // casi pegado al top
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.cineradar_logo),
+                        contentDescription = "Logo CineRadar",
+                        modifier = Modifier.size(36.dp) // más chico
                     )
                 }
 
-                item {
-                    CineRadarUIList(
-                        list = viewModel.uiState.mejoresPeliculasDelAnio,
-                        title = "\uD83C\uDFC6 MEJOR PELICULA DE LOS ULTIMOS AÑOS",
-                        onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
-                    )
-                }
+                Spacer(modifier = Modifier.height(12.dp))
 
-                item {
-                    CineRadarUIList(
-                        list = viewModel.uiState.mejoresSeriesDeLosUltimosAnios,
-                        title = "\uD83C\uDF1F SERIE POPULAR DE LOS ULTIMOS AÑO",
-                        onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
-                    )
-                }
+                // CONTENIDO
 
-                item {
-                    CineRadarUIList(
-                        list = viewModel.uiState.mejoresPeliculas,
-                        title = "\uD83D\uDD25 MEJOR PELICULA",
-                        onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
-                    )
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(bottom = 80.dp)
+                ) {
+                    item {
+                        CineRadarUIList(
+                            list = viewModel.uiState.mejoresSeries,
+                            title = "\uD83D\uDD25 MEJORES SERIES",
+                            onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
+                        )
+                    }
+
+                    item {
+                        CineRadarUIList(
+                            list = viewModel.uiState.mejoresPeliculasDelAnio,
+                            title = "\uD83C\uDFC6 MEJOR PELICULA DE LOS ULTIMOS AÑOS",
+                            onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
+                        )
+                    }
+
+                    item {
+                        CineRadarUIList(
+                            list = viewModel.uiState.mejoresSeriesDeLosUltimosAnios,
+                            title = "\uD83C\uDF1F SERIE POPULAR DE LOS ULTIMOS AÑO",
+                            onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
+                        )
+                    }
+
+                    item {
+                        CineRadarUIList(
+                            list = viewModel.uiState.mejoresPeliculas,
+                            title = "\uD83D\uDD25 MEJOR PELICULA",
+                            onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
+                        )
+                    }
                 }
             }
         }

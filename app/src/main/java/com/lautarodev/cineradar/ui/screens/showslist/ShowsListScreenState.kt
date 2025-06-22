@@ -7,5 +7,6 @@ data class ShowsListScreenState(
     val cienciaFiccion: List<shows> = emptyList(),
     val netflixTop: List<shows> = emptyList(),
     val disneyScifi: List<shows> = emptyList(),
-    val hboHorror: List<shows> = emptyList()
+    val hboHorror: List<shows> = emptyList(),
+    val isLoading: Boolean = true
 )

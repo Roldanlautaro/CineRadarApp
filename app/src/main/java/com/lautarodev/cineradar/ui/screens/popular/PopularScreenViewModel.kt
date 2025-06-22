@@ -29,6 +29,8 @@ class PopularScreenViewModel (
     fun fechtShows() {
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
+            uiState = uiState.copy(isLoading = true) // Mostrar loader
+
             try {
                 val mejoresSeries = ShowsRepository.getMejoresSeries()
                 val mejoresPeliculasDelAnio = ShowsRepository.getMejoresPeliculasDelAnio()
@@ -39,7 +41,8 @@ class PopularScreenViewModel (
                     mejoresSeries = mejoresSeries,
                     mejoresPeliculasDelAnio = mejoresPeliculasDelAnio,
                     mejoresSeriesDeLosUltimosAnios = mejoresSeriesDeLosUltimosAnios,
-                    mejoresPeliculas = mejoresPeliculas
+                    mejoresPeliculas = mejoresPeliculas,
+                    isLoading = false // Ocultar loader
                 )
 
             } catch (e: IOException) {

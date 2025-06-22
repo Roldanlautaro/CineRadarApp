@@ -6,5 +6,6 @@ data class PopularScreenState (
     val mejoresSeries: List<shows> = emptyList(),
     val mejoresPeliculasDelAnio: List<shows> = emptyList(),
     val mejoresSeriesDeLosUltimosAnios : List<shows> = emptyList(),
-    val mejoresPeliculas: List<shows> = emptyList()
+    val mejoresPeliculas: List<shows> = emptyList(),
+    val isLoading: Boolean = true
 )

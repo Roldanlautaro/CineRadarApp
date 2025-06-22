@@ -33,7 +33,7 @@ val navigationItems = listOf(
     NavigationItem(
         title = "Perfil",
         icon = Icons.Default.Person,
-        route = ""
+        route = Screens.Perfil.route
     )
 
 )
