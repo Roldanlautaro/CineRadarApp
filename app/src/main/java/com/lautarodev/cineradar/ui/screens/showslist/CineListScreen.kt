@@ -19,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.lautarodev.cineradar.R
 import com.lautarodev.cineradar.ui.screens.Screens
+import com.lautarodev.cineradar.ui.screens.commons.CineRadarRecommendations
 import com.lautarodev.cineradar.ui.screens.commons.CineRadarUIList
 import com.lautarodev.cineradar.ui.screens.commons.Navbar
 
@@ -67,12 +68,12 @@ fun CineListScreen(
                 contentPadding = PaddingValues(bottom = 80.dp)
             ) {
                 item {
-                    CineRadarUIList(
+                    CineRadarRecommendations(
                         list = viewModel.uiState.cienciaFiccion,
-                        title = "\uD83D\uDCA1 RECOMENDACIONES",
                         onClick = { id -> navController.navigate(Screens.ShowsDetail.route + "/$id") }
                     )
                 }
+
 
                 item {
                     CineRadarUIList(

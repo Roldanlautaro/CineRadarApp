@@ -45,7 +45,7 @@ fun NavigationStack(
         //Pantalla Detalle
         composable(route = Screens.ShowsDetail.route + "/{id}") { it ->
             val id = it.arguments?.getString("id") ?: ""
-            ShowsDetailScreen(id = id)
+            ShowsDetailScreen(id = id, navController = navController)
         }
         //Pantalla Busqueda
         composable(route = Screens.Busqueda.route) {
