@@ -37,6 +37,24 @@ class CineRadarTestShowsSource : ICineRadarShowsSource {
         TODO("Not yet implemented")
     }
 
+    // Pantalla popular
+
+    override suspend fun getMejoresSeries(): List<shows> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getMejoresPeliculasDelAnio(): List<shows> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getMejoresSeriesDeLosUltimosAnios(): List<shows> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getMejoresPeliculas(): List<shows> {
+        TODO("Not yet implemented")
+    }
+
     private var json = """
     {
   "shows": [

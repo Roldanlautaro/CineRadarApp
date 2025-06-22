@@ -3,7 +3,6 @@ package com.lautarodev.cineradar.ui.screens
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
@@ -24,7 +23,7 @@ val navigationItems = listOf(
     NavigationItem(
         title = "Popular",
         icon = Icons.Default.Star,
-        route = ""
+        route = Screens.Popular.route
     ),
     NavigationItem(
         title = "Listas",

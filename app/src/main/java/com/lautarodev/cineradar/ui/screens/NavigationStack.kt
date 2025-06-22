@@ -4,11 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.lautarodev.cineradar.ui.screens.ShowsDetail.ShowsDetailScreen
 import com.lautarodev.cineradar.ui.screens.busqueda.BusquedaScreen
 import com.lautarodev.cineradar.ui.screens.loader.LoaderScreen
 import com.lautarodev.cineradar.ui.screens.login.LoginScreen
+import com.lautarodev.cineradar.ui.screens.popular.PopularScreen
 import com.lautarodev.cineradar.ui.screens.showslist.CineListScreen
 import com.lautarodev.cineradar.ui.screens.splash.SplashScreen
 
@@ -50,6 +50,10 @@ fun NavigationStack(
         //Pantalla Busqueda
         composable(route = Screens.Busqueda.route) {
             BusquedaScreen(navController = navController)
+        }
+        // Pantalla Popular
+        composable(route = Screens.Popular.route) {
+            PopularScreen(navController = navController)
         }
     }
 }

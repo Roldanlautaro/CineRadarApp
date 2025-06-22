@@ -1,7 +1,5 @@
 package com.lautarodev.cineradar.shows
 
-import android.icu.text.CaseMap.Title
-import android.icu.text.StringSearch
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -22,6 +20,7 @@ interface IShowsAPI {
         @Path("id") id: String,
         @Query("country") country: String = "ar"
     ): shows
+
 
     // Pantalla Main
 
@@ -63,4 +62,40 @@ interface IShowsAPI {
         @Query("output_language") language: String = "es"
     ) : CineRadarResult
 
+
+    // Pantalla Popular
+
+    @GET("shows/search/filters")
+    suspend fun getMejoresSeries(
+        @Query("show_type") showType: String = "series",
+        @Query("rating_min") ratingMin: Int = 85,
+        @Query("country") country: String = "ar",
+        @Query("output_language") language: String = "es"
+    ) : CineRadarResult
+
+    @GET("shows/search/filters")
+    suspend fun getMejoresPeliculasDelAnio(
+        @Query("show_type") showType: String = "movie",
+        @Query("rating_min") ratingMin: Int = 75,
+        @Query("country") country: String = "ar",
+        @Query("output_language") language: String = "es",
+        @Query("year_min") releaseYear: Int = 2024
+    ) : CineRadarResult
+
+    @GET("shows/search/filters")
+    suspend fun getMejoresSeriesDeLosUltimosAnios(
+        @Query("show_type") showType: String = "series",
+        @Query("rating_min") ratingMin: Int = 75,
+        @Query("country") country: String = "ar",
+        @Query("output_language") language: String = "es",
+        @Query("year_min") releaseYear: Int = 2024
+    ) : CineRadarResult
+
+    @GET("shows/search/filters")
+    suspend fun getMejoresPeliculas(
+        @Query("show_type") showType: String = "movie",
+        @Query("rating_min") ratingMin: Int = 85,
+        @Query("country") country: String = "ar",
+        @Query("output_language") language: String = "es"
+    ) : CineRadarResult
 }

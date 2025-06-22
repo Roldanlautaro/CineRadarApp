@@ -1,11 +1,8 @@
 package com.lautarodev.cineradar.shows
 
 import android.util.Log
-import okhttp3.OkHttpClient
 import okio.IOException
 import retrofit2.HttpException
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class ShowsApiDataSource : ICineRadarShowsSource {
 
@@ -57,6 +54,28 @@ class ShowsApiDataSource : ICineRadarShowsSource {
 
     override suspend fun getAllMejoresPeliculasTerrorHBO(): List<shows> {
         val response: CineRadarResult = RetrofitInstance.showsApi.getAllMejoresPeliculasTerrorHBO()
+        return response.shows
+    }
+
+    // Pantalla popular
+
+    override suspend fun getMejoresSeries(): List<shows> {
+        val response: CineRadarResult = RetrofitInstance.showsApi.getMejoresSeries()
+        return response.shows
+    }
+
+    override suspend fun getMejoresPeliculasDelAnio(): List<shows> {
+        val response: CineRadarResult = RetrofitInstance.showsApi.getMejoresPeliculasDelAnio()
+        return response.shows
+    }
+
+    override suspend fun getMejoresSeriesDeLosUltimosAnios(): List<shows> {
+        val response: CineRadarResult = RetrofitInstance.showsApi.getMejoresSeriesDeLosUltimosAnios()
+        return response.shows
+    }
+
+    override suspend fun getMejoresPeliculas(): List<shows> {
+        val response: CineRadarResult = RetrofitInstance.showsApi.getMejoresPeliculas()
         return response.shows
     }
 }

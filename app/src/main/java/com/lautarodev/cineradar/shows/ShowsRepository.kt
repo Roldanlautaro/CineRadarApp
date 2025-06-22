@@ -35,5 +35,23 @@ class ShowsRepository(
         return CineRadarShowsSource.getAllMejoresPeliculasTerrorHBO()
     }
 
+    // Pantalla Popular
+
+    override suspend fun getMejoresSeries(): List<shows> {
+        return CineRadarShowsSource.getMejoresSeries()
+    }
+
+    override suspend fun getMejoresPeliculasDelAnio(): List<shows> {
+        return CineRadarShowsSource.getMejoresPeliculasDelAnio()
+    }
+
+    override suspend fun getMejoresSeriesDeLosUltimosAnios(): List<shows> {
+        return CineRadarShowsSource.getMejoresSeriesDeLosUltimosAnios()
+    }
+
+    override suspend fun getMejoresPeliculas(): List<shows> {
+        return CineRadarShowsSource.getMejoresPeliculas()
+    }
+
 
 }
