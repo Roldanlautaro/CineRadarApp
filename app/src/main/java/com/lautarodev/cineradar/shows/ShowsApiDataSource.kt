@@ -1,8 +1,14 @@
 package com.lautarodev.cineradar.shows
 
 import android.util.Log
+import com.google.firebase.firestore.FirebaseFirestore
+import com.lautarodev.cineradar.shows.local.ShowsDataBase
+import com.lautarodev.cineradar.shows.local.ShowsDataBaseProvider
+import com.lautarodev.cineradar.shows.local.toLocal
+import com.lautarodev.cineradar.shows.local.toShows
 import okio.IOException
 import retrofit2.HttpException
+import kotlinx.coroutines.tasks.await
 
 class ShowsApiDataSource : ICineRadarShowsSource {
 
@@ -30,9 +36,26 @@ class ShowsApiDataSource : ICineRadarShowsSource {
     }
 
     override suspend fun getShowById(id: String): shows {
-        Log.d("id", id)
-        return RetrofitInstance.showsApi.getShow(id)
+
+        val dblocal = ShowsDataBaseProvider.dbLocal
+
+
+        // Local
+        var showsLocal = dblocal.showsDao().finById(id)
+        if (showsLocal != null) {
+            Log.d("SHOWSDB", "encontrado en room")
+            return showsLocal.toShows()
+
+        }
+        else{
+            var show = RetrofitInstance.showsApi.getShow(id)
+            dblocal.showsDao().insert(show.toLocal())
+
+            return show
+        }
+
     }
+
 
     // Pantalla main
 

@@ -28,7 +28,7 @@ val navigationItems = listOf(
     NavigationItem(
         title = "Listas",
         icon = Icons.AutoMirrored.Filled.List,
-        route = ""
+        route = Screens.Lista.route
     ),
     NavigationItem(
         title = "Perfil",

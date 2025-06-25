@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.lautarodev.cineradar.ui.screens.ShowsDetail.ShowsDetailScreen
 import com.lautarodev.cineradar.ui.screens.busqueda.BusquedaScreen
+import com.lautarodev.cineradar.ui.screens.lista.ListaScreen
 import com.lautarodev.cineradar.ui.screens.login.LoginScreen
 import com.lautarodev.cineradar.ui.screens.perfil.PerfilScreen
 import com.lautarodev.cineradar.ui.screens.popular.PopularScreen
@@ -16,6 +17,7 @@ import com.lautarodev.cineradar.ui.screens.splash.SplashScreen
 fun NavigationStack(
 
     onGoogleSignInClick: () -> Unit,
+    onLogout: () -> Unit,
     navController: NavHostController,
 )
 {
@@ -61,6 +63,10 @@ fun NavigationStack(
                 },
                 navController = navController
             )
+        }
+        // Pantalla Lista
+        composable(route = Screens.Lista.route) {
+            ListaScreen(navController = navController)
         }
     }
 }

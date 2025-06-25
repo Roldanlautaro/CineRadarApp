@@ -21,10 +21,21 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.lautarodev.cineradar.R
 import com.lautarodev.cineradar.shows.shows
+import com.lautarodev.cineradar.ui.screens.commons.BotonLista
+import com.lautarodev.cineradar.ui.screens.commons.BotonVisto
 import com.lautarodev.cineradar.ui.screens.commons.Navbar
 
 @Composable
-fun ShowsUiItemDetail(shows: shows, navController: NavHostController) {
+fun ShowsUiItemDetail(
+    shows: shows,
+    navController: NavHostController,
+    isSaved: Boolean,
+    isVisto: Boolean,
+    onSaveClick: (showId: String) -> Unit,
+    onVistoClick: (showId: String) -> Unit
+)
+
+{
     val density = LocalDensity.current
     var textWidth by remember { mutableStateOf(0) }
 
@@ -41,7 +52,8 @@ fun ShowsUiItemDetail(shows: shows, navController: NavHostController) {
                 .padding(innerPadding)
                 .background(Color.Black)
         ) {
-            // Imagen horizontal con botones
+
+            // IMAGEN CON BOTONES
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -59,14 +71,14 @@ fun ShowsUiItemDetail(shows: shows, navController: NavHostController) {
                         .align(Alignment.TopEnd)
                         .padding(12.dp)
                 ) {
-                    IconWithBackground(
-                        iconId = R.drawable.lista_icon,
-                        onClick = { /* TODO: agregar a lista */ }
+                    BotonLista(
+                        onToggle = { onSaveClick(shows.id) },
+                        isSaved = isSaved
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    IconWithBackground(
-                        iconId = R.drawable.visto_icon,
-                        onClick = { /* TODO: marcar como visto */ }
+                    BotonVisto(
+                        onToggle = { onVistoClick(shows.id) },
+                        isVisto = isVisto
                     )
                 }
             }
@@ -82,7 +94,7 @@ fun ShowsUiItemDetail(shows: shows, navController: NavHostController) {
                     modifier = Modifier
                         .width(100.dp)
                         .height(150.dp)
-                        .offset(y = (-40).dp) // hace que "pise" la imagen horizontal
+                        .offset(y = (-40).dp)
                         .clip(RoundedCornerShape(12.dp))
                 ) {
                     AsyncImage(
@@ -134,7 +146,6 @@ fun ShowsUiItemDetail(shows: shows, navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // 📝 Descripción
             SectionTitleWithBar("- Descripción :")
             Spacer(modifier = Modifier.height(4.dp))
             Text(
@@ -146,7 +157,6 @@ fun ShowsUiItemDetail(shows: shows, navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // 🎭 Actores
             SectionTitleWithBar("- Actores :")
             Spacer(modifier = Modifier.height(4.dp))
             Text(
@@ -158,7 +168,6 @@ fun ShowsUiItemDetail(shows: shows, navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Plataforma dinámica
             val plataformaIcon = when (shows.showType.lowercase()) {
                 "netflix" -> R.drawable.netflix_icon
                 "disney" -> R.drawable.disney_icon
@@ -188,7 +197,8 @@ fun ShowsUiItemDetail(shows: shows, navController: NavHostController) {
     }
 }
 
-@Composable
+
+    @Composable
 fun IconWithBackground(iconId: Int, onClick: () -> Unit) {
     Box(
         modifier = Modifier
@@ -228,12 +238,19 @@ fun TitleWithBar(title: String) {
                     .width(with(density) { textWidth.toDp() })
                     .height(4.dp)
             ) {
-                Box(modifier = Modifier.weight(1f).fillMaxHeight().background(Color(0xFFFF0404)))
-                Box(modifier = Modifier.weight(1f).fillMaxHeight().background(Color(0xFF0496FF)))
+                Box(modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color(0xFFFF0404)))
+                Box(modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color(0xFF0496FF)))
             }
         }
     }
 }
+
 
 // Secciones como "Descripción", "Actores", "Plataforma"
 @Composable
@@ -258,8 +275,14 @@ fun SectionTitleWithBar(title: String) {
                     .width(with(density) { textWidth.toDp() })
                     .height(4.dp)
             ) {
-                Box(modifier = Modifier.weight(1f).fillMaxHeight().background(Color(0xFFFF0404)))
-                Box(modifier = Modifier.weight(1f).fillMaxHeight().background(Color(0xFF0496FF)))
+                Box(modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color(0xFFFF0404)))
+                Box(modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color(0xFF0496FF)))
             }
         }
     }

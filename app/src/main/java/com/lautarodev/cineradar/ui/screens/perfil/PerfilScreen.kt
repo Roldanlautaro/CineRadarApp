@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.lautarodev.cineradar.R
+import com.lautarodev.cineradar.ui.screens.Screens
 import com.lautarodev.cineradar.ui.screens.commons.Navbar
 
 @Composable
@@ -36,6 +37,11 @@ fun PerfilScreen(
     navController: NavHostController
 ) {
     val state by viewModel.uiState.collectAsState()
+
+    // 🔁 Se recarga cada vez que entrás a la pantalla
+    LaunchedEffect(Unit) {
+        viewModel.cargarVistos()
+    }
 
     Scaffold(
         bottomBar = { Navbar(navController = navController) },
@@ -79,7 +85,7 @@ fun PerfilScreen(
                         .padding(horizontal = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // FOTO
+                    // FOTO DE PERFIL
                     if (state.userPhotoUrl != null) {
                         AsyncImage(
                             model = state.userPhotoUrl,
@@ -114,14 +120,14 @@ fun PerfilScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Button(onClick = { viewModel.logout(onLogout) }) {
+                    Button(onClick = onLogout) {
                         Text(text = "Cerrar sesión")
                     }
 
                     Spacer(modifier = Modifier.height(32.dp))
 
                     Text(
-                        text = "Películas vistas",
+                        text = "Películas vistas (${state.vistos.size})",
                         style = MaterialTheme.typography.titleLarge,
                         color = Color.White,
                         modifier = Modifier
@@ -142,7 +148,10 @@ fun PerfilScreen(
                                 Card(
                                     modifier = Modifier
                                         .size(width = 140.dp, height = 220.dp)
-                                        .clickable {  },
+                                        .clickable {
+                                            // Navega al detalle del show
+                                            navController.navigate(Screens.ShowsDetail.route + "/${show.id}")
+                                        },
                                     shape = RoundedCornerShape(12.dp),
                                     elevation = CardDefaults.cardElevation(8.dp),
                                     colors = CardDefaults.cardColors(

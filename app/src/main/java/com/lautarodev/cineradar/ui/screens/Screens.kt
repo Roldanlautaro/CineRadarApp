@@ -9,4 +9,5 @@ sealed class Screens(val route: String) {
     object Busqueda: Screens("Busqueda_Screen")
     object Popular : Screens ("Popular_Screen")
     object Perfil : Screens ("Perfil_Screen")
+    object Lista : Screens ("Lista_Screen")
 }
