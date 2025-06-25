@@ -22,6 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -37,6 +39,8 @@ fun PerfilScreen(
     navController: NavHostController
 ) {
     val state by viewModel.uiState.collectAsState()
+    var textWidth by remember { mutableStateOf(0) }
+    val density = LocalDensity.current
 
     // 🔁 Se recarga cada vez que entrás a la pantalla
     LaunchedEffect(Unit) {
@@ -66,6 +70,7 @@ fun PerfilScreen(
                     modifier = Modifier.size(36.dp)
                 )
             }
+
             Spacer(modifier = Modifier.height(12.dp))
 
             if (state.isLoading) {
@@ -126,14 +131,44 @@ fun PerfilScreen(
 
                     Spacer(modifier = Modifier.height(32.dp))
 
-                    Text(
-                        text = "Películas vistas (${state.vistos.size})",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = Color.White,
+                    // 🔻 Título + barra decorativa
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(start = 8.dp, bottom = 8.dp)
-                    )
+                    ) {
+                        Text(
+                            text = "Películas vistas (${state.vistos.size})",
+                            style = MaterialTheme.typography.titleLarge,
+                            color = Color.White,
+                            modifier = Modifier.onGloballyPositioned { coordinates ->
+                                textWidth = coordinates.size.width
+                            }
+                        )
+
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        if (textWidth > 0) {
+                            Row(
+                                modifier = Modifier
+                                    .width(with(density) { textWidth.toDp() })
+                                    .height(4.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .fillMaxHeight()
+                                        .background(Color(0xFFFF0404))
+                                )
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .fillMaxHeight()
+                                        .background(Color(0xFF0496FF))
+                                )
+                            }
+                        }
+                    }
 
                     if (state.vistos.isEmpty()) {
                         Text(
@@ -149,7 +184,6 @@ fun PerfilScreen(
                                     modifier = Modifier
                                         .size(width = 140.dp, height = 220.dp)
                                         .clickable {
-                                            // Navega al detalle del show
                                             navController.navigate(Screens.ShowsDetail.route + "/${show.id}")
                                         },
                                     shape = RoundedCornerShape(12.dp),
@@ -173,3 +207,4 @@ fun PerfilScreen(
         }
     }
 }
+

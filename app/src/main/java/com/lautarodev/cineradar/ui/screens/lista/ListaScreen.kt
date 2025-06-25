@@ -11,6 +11,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.*
@@ -28,8 +30,9 @@ fun ListaScreen(
     viewModel: ListaScreenViewModel = viewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
+    var textWidth by remember { mutableStateOf(0) }
+    val density = LocalDensity.current
 
-    // Se recarga la lista cada vez que entras o recompones la pantalla
     LaunchedEffect(Unit) {
         viewModel.cargarGuardados()
     }
@@ -38,7 +41,6 @@ fun ListaScreen(
         bottomBar = { Navbar(navController = navController) },
         containerColor = Color.Black
     ) { innerPadding ->
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,7 +62,10 @@ fun ListaScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(start = 16.dp)
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.lista_icon),
                     contentDescription = null,
@@ -68,12 +73,42 @@ fun ListaScreen(
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                    text = "TU LISTA (${state.listaShows.size})",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp
-                )
+
+                // Título + barra de colores
+                Column {
+                    Text(
+                        text = "TU LISTA (${state.listaShows.size})",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        modifier = Modifier.onGloballyPositioned { coordinates ->
+                            textWidth = coordinates.size.width
+                        }
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    if (textWidth > 0) {
+                        Row(
+                            modifier = Modifier
+                                .width(with(density) { textWidth.toDp() })
+                                .height(4.dp)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .background(Color(0xFFFF0404))
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .background(Color(0xFF0496FF))
+                            )
+                        }
+                    }
+                }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
